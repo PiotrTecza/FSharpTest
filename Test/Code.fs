@@ -21,16 +21,15 @@ let cos p1 p2 =
     match p1 = p2 with
     | true -> 2.0
     | false ->
-        let x = float p2.X
+        let x = p2.X - p1.X |> float
         let r =
-            pown p2.X 2 + pown (p2.Y - p1.Y) 2
+            pown (p2.X - p1.X) 2 + pown (p2.Y - p1.Y) 2
             |> float
             |> sqrt
         x/r
 
 let perimeter (points:Point list) = 
-    let matrix = points @ [List.head points]
-    List.sumBy dist (matrix |> List.pairwise)
+    List.sumBy dist (points |> List.pairwise)
 
 let mapPoints minPoint point  =
     {
@@ -62,8 +61,9 @@ let grahamScan points =
         |> List.map (mapPoints min)
         |> List.sortByDescending(fun p -> p.Angle)
         |> filterColinear
+    let matrix = sorted @ [List.head sorted]
     let mutable counter = 0
-    for point in sorted do
+    for point in matrix do
         match counter < 3 with
         | true -> 
             counter <- counter + 1
@@ -77,5 +77,5 @@ let grahamScan points =
             stack.Push top2
             stack.Push top
             stack.Push point
-    let stackList = List.ofSeq stack
-    perimeter stackList
+    let finalList = stack |> List.ofSeq
+    perimeter finalList
