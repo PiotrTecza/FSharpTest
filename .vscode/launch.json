@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET CLR Launch",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "build CLR",
+            "program": "${workspaceRoot}/Test/bin/Debug/net461/Test.exe",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}
