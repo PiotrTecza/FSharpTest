@@ -1,5 +1,4 @@
 ﻿module Code
-open System.Collections.Generic
 
 type Point = { X: int; Y: int; }
 
@@ -16,5 +15,13 @@ let dist (p1,p2) =
     pown (p2.X-p1.X) 2 + pown (p2.Y-p1.Y) 2
     |> float
     |> sqrt
+
+let cos p1 p2 = 
+    let x = float p2.X
+    let r =
+        pown p2.X 2 + pown (p2.Y - p1.Y) 2
+        |> float
+        |> sqrt
+    x/r
 
 let perimeter points = List.sumBy dist (points |> List.pairwise)
